@@ -30,7 +30,7 @@ from langchain_text_splitters import (
     RecursiveCharacterTextSplitter,
     TokenTextSplitter,
 )
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from local_llm.config import (
@@ -506,7 +506,7 @@ class EmbeddingModelUpdateForm(BaseModel):
     azure_openai_config: AzureOpenAIConfigForm | None = None
     RAG_EMBEDDING_ENGINE: str
     RAG_EMBEDDING_MODEL: str
-    RAG_EMBEDDING_BATCH_SIZE: int | None = 1
+    RAG_EMBEDDING_BATCH_SIZE: int | None = Field(default=1, ge=1)
     ENABLE_ASYNC_EMBEDDING: bool | None = True
     RAG_EMBEDDING_CONCURRENT_REQUESTS: int | None = 0
 
